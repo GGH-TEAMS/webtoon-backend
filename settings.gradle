@@ -1,0 +1,26 @@
+rootProject.name = 'webtoon-backend'
+
+def modulesAppDir = new File(rootProject.projectDir, "app")
+def modulesDomainDir = new File(rootProject.projectDir, "domain")
+def modulesCoreDir = new File(rootProject.projectDir, "core")
+
+
+
+modulesAppDir.listFiles()?.each { file ->
+    if(file.isDirectory()) {
+        include "app:${file.name}"
+    }
+}
+
+modulesCoreDir.listFiles()?.each { file ->
+    if(file.isDirectory()) {
+        include "core:${file.name}"
+    }
+}
+
+modulesDomainDir.listFiles()?.each { file ->
+    if(file.isDirectory()) {
+        include "domain:${file.name}"
+    }
+}
+

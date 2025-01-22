@@ -13,6 +13,20 @@ services:
         condition: service_healthy
     networks:
       - webtoon
+  media-file-api:
+    env_file:
+      - ./app/media-file-api/env/local.env
+    image: media-file-api:latest
+    build:
+      context: .
+      dockerfile: app/media-file-api/Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - webtoon
   db:
     image: webtoon-db:latest
     build:

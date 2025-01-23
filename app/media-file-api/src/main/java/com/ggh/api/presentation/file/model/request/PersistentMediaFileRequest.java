@@ -31,7 +31,7 @@ public record PersistentMediaFileRequest(
                 example = "webtoon-content"
         )
         @NotBlank
-        String usecase,
+        String useCase,
 
         @Schema(
                 description = """
@@ -40,7 +40,7 @@ public record PersistentMediaFileRequest(
                         """,
                 example = "3"
         )
-        @Min(0)
+        @Min(-1)
         Integer expirationDay
 ) {
 }

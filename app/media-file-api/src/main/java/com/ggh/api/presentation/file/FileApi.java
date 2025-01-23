@@ -47,11 +47,11 @@ public interface FileApi {
     void deleteMediaFile(@Valid @RequestBody DeleteMediaFileRequest request);
 
     @Operation(
-            summary = "미디어 파일 Persistent API",
+            summary = "미디어 파일 Persist API",
             description = """
                     미디어 파일에 대한 구체적인 Metadata 설정하는 API
                     """
     )
-    @PutMapping(value = "/persistent", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/persist", produces = MediaType.APPLICATION_JSON_VALUE)
     void persistentMediaFile(@Valid @RequestBody PersistentMediaFileRequest request);
 }

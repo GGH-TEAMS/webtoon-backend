@@ -55,4 +55,15 @@ public class FileService {
         fileRepository.delete(fileRepositoryProperties, filePath);
         fileMetadataRepository.delete(fileMetadata);
     }
+
+    @Transactional
+    public void persistFile(String fileUrl, int expirationDay, String serviceId, String useCase) {
+        var fileMetadata = fileMetadataRepository.findByFileUrl(fileUrl).orElseThrow();
+        var persistentMetadata = new PersistentMetadata(serviceId, useCase);
+        fileMetadata.persist(
+                LocalDate.now(),
+                expirationDay,
+                persistentMetadata
+        );
+    }
 }

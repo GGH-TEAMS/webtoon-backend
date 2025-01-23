@@ -55,5 +55,6 @@ public class FileApiController implements FileApi {
 
     @Override
     public void persistentMediaFile(PersistentMediaFileRequest request) {
+        fileService.persistFile(request.fileUrl(), request.expirationDay(), request.serviceId(), request.useCase());
     }
 }

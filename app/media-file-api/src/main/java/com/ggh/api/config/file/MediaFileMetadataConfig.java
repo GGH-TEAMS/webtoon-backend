@@ -1,17 +1,21 @@
 package com.ggh.api.config.file;
 
 import com.ggh.api.core.data.file.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.nio.file.Path;
 
+@RequiredArgsConstructor
 @Configuration
 public class MediaFileMetadataConfig {
 
+    private final LocalFileProperties localFileProperties;
+
     @Bean
-    public DirectoryPathExtender directoryPathExtender() {
-        return new DateDirectoryPathExtender();
+    public FileDirectoryPathExtender directoryPathExtender() {
+        return new DateFileDirectoryPathExtender();
     }
 
     @Bean
@@ -20,12 +24,12 @@ public class MediaFileMetadataConfig {
     }
 
     @Bean
-    public DirectoryPathGenerator directoryPathGenerator(
-            DirectoryPathExtender directoryPathExtender
+    public FileDirectoryPathGenerator directoryPathGenerator(
+            FileDirectoryPathExtender fileDirectoryPathExtender
     ) {
         return () -> {
-            var base = Path.of("");
-            return directoryPathExtender.extendPath(base);
+            var base = Path.of(localFileProperties.getBaseDir());
+            return fileDirectoryPathExtender.extendPath(base);
         };
     }
 }

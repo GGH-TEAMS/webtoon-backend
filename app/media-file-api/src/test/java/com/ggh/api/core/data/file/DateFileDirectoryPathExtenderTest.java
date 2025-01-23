@@ -8,14 +8,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-class DateDirectoryPathExtenderTest {
+class DateFileDirectoryPathExtenderTest {
 
-    private final DateDirectoryPathExtender extender = new DateDirectoryPathExtender();
+    private final DateFileDirectoryPathExtender extender = new DateFileDirectoryPathExtender();
 
     @Test
     void 현재_날짜를_경로에_추가한다() {

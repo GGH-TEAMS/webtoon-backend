@@ -1,0 +1,8 @@
+POST {{url}}/v1/media-file
+Content-Type: multipart/form-data; boundary=boundary
+X-API-KEY: {{api-key}}
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="animal.jpeg"
+
+< ./animal.jpeg

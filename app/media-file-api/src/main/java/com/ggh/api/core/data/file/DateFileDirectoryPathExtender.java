@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.time.Clock;
 import java.time.LocalDate;
 
-public class DateDirectoryPathExtender implements DirectoryPathExtender {
+public class DateFileDirectoryPathExtender implements FileDirectoryPathExtender {
 
     @Override
     public Path extendPath(Path base) {

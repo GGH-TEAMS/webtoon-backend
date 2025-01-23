@@ -1,6 +1,13 @@
 spring:
   application:
     name: media-file-api
+  mvc:
+    static-path-pattern: /media-file/**
+  web:
+    resources:
+      static-locations:
+        - file:${MEDIA_FILE_LOCAL_BASE_DIR}
+        - classpath:/static/
   jpa:
     hibernate:
       ddl-auto: validate
@@ -26,6 +33,12 @@ springdoc:
 
 app:
   api-key: ${MEDIA_FILE_API_KEY}
+  file:
+    local:
+      base-url: ${MEDIA_FILE_LOCAL_BASE_URL}
+      base-dir: ${MEDIA_FILE_LOCAL_BASE_DIR}
+
+
 
 # server config
 server:

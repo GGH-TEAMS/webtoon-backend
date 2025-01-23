@@ -1,3 +1,4 @@
+### 미디어 파일 업로드
 POST {{url}}/v1/media-file
 Content-Type: multipart/form-data; boundary=boundary
 X-API-KEY: {{api-key}}
@@ -6,3 +7,12 @@ X-API-KEY: {{api-key}}
 Content-Disposition: form-data; name="file"; filename="animal.jpeg"
 
 < ./animal.jpeg
+
+### 미디어 파일 삭제
+POST {{url}}/v1/media-file/delete
+Content-Type: application/json
+X-API-KEY: {{api-key}}
+
+{
+  "fileUrl": "http://localhost:8081/media-file/2025/1/23/52f08ec5-adb1-44df-bd01-1889e0b3979b.jpeg"
+}

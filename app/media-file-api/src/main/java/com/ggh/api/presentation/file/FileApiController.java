@@ -50,6 +50,7 @@ public class FileApiController implements FileApi {
 
     @Override
     public void deleteMediaFile(DeleteMediaFileRequest request) {
+        fileService.deleteFile(request.fileUrl());
     }
 
     @Override

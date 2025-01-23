@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor
@@ -41,5 +43,16 @@ public class FileService {
         fileMetadataRepository.save(fileMetadata);
 
         return fileMetadata.getFileUrl();
+    }
+
+    @Transactional
+    public void deleteFile(String fileUrl) {
+        var fileMetadata = fileMetadataRepository.findByFileUrl(fileUrl).orElseThrow();
+        var filePath = Path.of(fileMetadata.getDirectoryPath())
+                .resolve(fileMetadata.getFilename())
+                .normalize();
+
+        fileRepository.delete(fileRepositoryProperties, filePath);
+        fileMetadataRepository.delete(fileMetadata);
     }
 }

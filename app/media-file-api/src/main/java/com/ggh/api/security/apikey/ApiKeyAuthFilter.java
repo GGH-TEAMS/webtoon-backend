@@ -45,7 +45,7 @@ public class ApiKeyAuthFilter extends OncePerRequestFilter {
             accessDeniedHandler.handle(request, response, e);
             return;
         } catch (Exception e) {
-            log.trace("API 키 인증 중 알 수 없는 문제가 발생하였습니다. 확인하고 고쳐야 합니다.");
+            log.trace("API 키 인증 중 알 수 없는 문제가 발생하였습니다.");
             accessDeniedHandler.handle(request, response, new ApiKeyException(e.getMessage()));
         }
 

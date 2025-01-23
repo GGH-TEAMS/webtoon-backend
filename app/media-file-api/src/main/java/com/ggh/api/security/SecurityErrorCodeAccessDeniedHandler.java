@@ -1,6 +1,8 @@
 package com.ggh.api.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ggh.api.error.MediaFileErrorCode;
+import com.ggh.core.web.ErrorCode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,8 +21,6 @@ public class SecurityErrorCodeAccessDeniedHandler extends SecurityErrorCodeRespo
     public void handle(final HttpServletRequest request, final HttpServletResponse response, final AccessDeniedException accessDeniedException) throws IOException, ServletException {
         var status = HttpServletResponse.SC_FORBIDDEN;
 
-        var errorCode = AuthorizationErrorCodeTranslator.determineErrorCode(accessDeniedException);
-
-        handle(request, response, errorCode, accessDeniedException.getMessage(), status);
+        handle(request, response, MediaFileErrorCode.DEFAULT, accessDeniedException.getMessage(), status);
     }
 }

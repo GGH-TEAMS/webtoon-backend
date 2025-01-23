@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: media-file-api
+  mvc:
+    static-path-pattern: /media-file/**
+  web:
+    resources:
+      static-locations:
+        - file:${MEDIA_FILE_LOCAL_BASE_DIR}
+        - classpath:/static/
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    open-in-view: false
+  datasource:
+    hikari:
+      maximum-pool-size: 51 # pool size = Tn * (Cn - 1) + 1, [Tn: ?? ??? ??, Cn: ? Task ?? ??? ??? Connection ?]
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST}/${DB_NAME}
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  api-key: ${MEDIA_FILE_API_KEY}
+  file:
+    local:
+      base-url: ${MEDIA_FILE_LOCAL_BASE_URL}
+      base-dir: ${MEDIA_FILE_LOCAL_BASE_DIR}
+
+
+
+# server config
+server:
+  port: 8081

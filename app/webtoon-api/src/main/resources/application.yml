@@ -16,6 +16,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_HOST}/${DB_NAME}
 
+auth:
+  token:
+    secret-key: PRgC86nrnKYVtfZdKpnw1DDGgPJw0KyrcQlDirTxCRw=
+    access-token-ttl: 30m # 30 minute
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

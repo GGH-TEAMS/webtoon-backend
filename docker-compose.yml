@@ -11,6 +11,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
     networks:
       - webtoon
   media-file-api:
@@ -25,13 +27,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
     networks:
       - webtoon
   db:
     image: webtoon-db:latest
     build:
-      context: .
-      dockerfile: db/mysql/Dockerfile
+      context: ./db
+      dockerfile: mysql/Dockerfile
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
@@ -41,6 +45,19 @@ services:
       - webtoon
     ports:
       - "3307:3306"
+  flyway:
+    env_file:
+      - ./db/flyway/env/local.env
+    image: webtoon-flyway:latest
+    build:
+      context: ./db/flyway
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    command: migrate
+    networks:
+      - webtoon
 networks:
   webtoon:
     driver: bridge
